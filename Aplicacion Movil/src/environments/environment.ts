@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   // Aquí se almacena la clave de API de Google Maps
   // Asegúrate de reemplazar 'TU_CLAVE_DE_API_AQUI' con tu clave real
-  googleMapsApiKey: 'AIzaSyCrnw7tPASz16T4K8vPkHQdqYJBcB0H7Hc',
-  apiUrl: 'http://127.0.0.1:8000'
+  apiUrl: 'http://127.0.0.1:8000',
 };
 
 /*

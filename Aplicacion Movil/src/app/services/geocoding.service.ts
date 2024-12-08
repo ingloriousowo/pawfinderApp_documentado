@@ -16,16 +16,18 @@ export interface GeocodingResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GeocodingService {
-  private apiKey = 'AIzaSyCrnw7tPASz16T4K8vPkHQdqYJBcB0H7Hc'; // Reemplaza con tu API key de Google Maps
+  private apiKey = ''; // Reemplaza con tu API key de Google Maps
   private apiUrl = 'https://maps.googleapis.com/maps/api/geocode/json';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   geocodeAddress(address: string): Observable<GeocodingResponse> {
-    const url = `${this.apiUrl}?address=${encodeURIComponent(address)}&key=${this.apiKey}`;
+    const url = `${this.apiUrl}?address=${encodeURIComponent(address)}&key=${
+      this.apiKey
+    }`;
     return this.http.get<GeocodingResponse>(url);
   }
 }
