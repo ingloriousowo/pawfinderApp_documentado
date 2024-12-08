@@ -1,0 +1,208 @@
+// Estilos para el encabezado
+ion-header {
+  ion-toolbar {
+    --background: #ffffff;
+
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      ion-icon {
+        color: #ff6b00;
+        font-size: 24px;
+      }
+
+      span {
+        color: #ff6b00;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// Contenedor principal del formulario
+.register-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+// Estilos para el encabezado del formulario
+.form-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    color: #ff6b00;
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  p {
+    color: #666666;
+    font-size: 16px;
+  }
+}
+
+// Estilos para cada sección del formulario
+.form-section {
+  margin-bottom: 24px;
+
+  h2 {
+    color: #ff6b00;
+    font-size: 18px;
+    margin-bottom: 16px;
+    font-weight: 500;
+    padding-left: 16px;
+    border-left: 3px solid #ff6b00;
+  }
+}
+
+// Estilos para los elementos de formulario de Ionic
+ion-item {
+  --background: #ffffff;
+  --border-color: #e0e0e0;
+  --border-radius: 8px;
+  --border-width: 1px;
+  --padding-start: 16px;
+  --highlight-height: 2px;
+  --highlight-color-focused: #ff6b00;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  ion-label {
+    --color: #666666;
+  }
+
+  ion-icon {
+    color: #ff6b00;
+    margin-right: 8px;
+  }
+
+  ion-input, ion-select {
+    --padding-start: 8px;
+    --placeholder-color: #999999;
+    --placeholder-opacity: 1;
+  }
+
+  &.item-has-focus {
+    --border-color: #ff6b00;
+    --border-width: 2px;
+    animation: focusAnimation 0.3s ease-in-out;
+  }
+}
+
+// Animación para el enfoque de los elementos del formulario
+@keyframes focusAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+// Estilos para el botón de registro
+.register-button {
+  margin-top: 32px;
+  --background: #ff6b00;
+  --background-activated: #e65c00;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(255, 107, 0, 0.2);
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  ion-icon {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+
+  &:not([disabled]) {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+
+  &[disabled] {
+    --background: #cccccc;
+    --opacity: 1;
+  }
+}
+
+// Animaciones de entrada para los elementos del formulario
+.form-section {
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 0;
+
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Estilos para el input de archivo (foto de perfil)
+.file-input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+
+  ion-button {
+    --padding-start: 15px;
+    --padding-end: 15px;
+  }
+
+  ion-text {
+    margin-left: 10px;
+    color: #666666;
+  }
+}
+
+// Estilos para el modo oscuro
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: #121212;
+  }
+
+  .form-header {
+    h1 {
+      color: #ff6b00;
+    }
+    p {
+      color: #b0b0b0;
+    }
+  }
+
+  ion-item {
+    --background: #1e1e1e;
+    --border-color: #333333;
+
+    ion-label {
+      --color: #ffffff;
+    }
+  }
+
+  .file-input-container {
+    ion-text {
+      color: #b0b0b0;
+    }
+  }
+}

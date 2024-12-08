@@ -1,0 +1,141 @@
+<!-- Encabezado de la página -->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Botón de retroceso -->
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/auth/login"
+        text=""
+        icon="arrow-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <!-- Título de la página con icono -->
+    <ion-title>
+      <div class="title-container">
+        <ion-icon name="paw-outline"></ion-icon>
+        <span>Registro PawFinder</span>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenido principal de la página -->
+<ion-content class="ion-padding">
+  <div class="register-container">
+    <!-- Encabezado del formulario -->
+    <div class="form-header">
+      <h1>¡Únete a nuestra comunidad!</h1>
+      <p>Completa tus datos para comenzar</p>
+    </div>
+
+    <!-- Formulario de registro -->
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="register-form"
+    >
+      <!-- Sección de información personal -->
+      <div class="form-section">
+        <h2>Información Personal</h2>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input type="text" formControlName="apellido"></ion-input>
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+        </ion-item>
+      </div>
+
+      <!-- Sección de contacto -->
+      <div class="form-section">
+        <h2>Contacto</h2>
+        <ion-item>
+          <ion-label position="floating">Teléfono</ion-label>
+          <ion-input type="tel" formControlName="telefono"></ion-input>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input type="email" formControlName="correo"></ion-input>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+        </ion-item>
+      </div>
+
+      <!-- Sección de detalles adicionales -->
+      <div class="form-section">
+        <h2>Detalles Adicionales</h2>
+        <ion-item>
+          <ion-label>Género</ion-label>
+          <ion-select formControlName="genero">
+            <ion-select-option value="1">Masculino</ion-select-option>
+            <ion-select-option value="2">Femenino</ion-select-option>
+            <ion-select-option value="3">Otro</ion-select-option>
+          </ion-select>
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">RUT</ion-label>
+          <ion-input type="text" formControlName="rut"></ion-input>
+          <ion-icon name="card-outline" slot="start"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Dígito Verificador</ion-label>
+          <ion-input type="text" formControlName="dv" maxlength="1"></ion-input>
+          <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        </ion-item>
+      </div>
+
+      <!-- Sección de seguridad -->
+      <div class="form-section">
+        <h2>Seguridad</h2>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        </ion-item>
+      </div>
+
+      <!-- Sección de foto de perfil -->
+      <div class="form-section">
+        <h2>Foto de Perfil</h2>
+        <ion-item>
+          <ion-label>Seleccionar Foto</ion-label>
+          <!-- Input de archivo oculto -->
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            #fileInput
+            hidden
+          />
+          <div class="file-input-container">
+            <!-- Botón para activar el input de archivo -->
+            <ion-button fill="outline" (click)="triggerFileInput(fileInput)">
+              <ion-icon name="image-outline" slot="start"></ion-icon>
+              Elegir archivo
+            </ion-button>
+            <!-- Texto que muestra el nombre del archivo seleccionado -->
+            <ion-text>
+              {{ selectedFileName }}
+            </ion-text>
+          </div>
+        </ion-item>
+      </div>
+
+      <!-- Botón de envío del formulario -->
+      <ion-button
+        data-test-id="registerBtn"
+        expand="block"
+        type="submit"
+        [disabled]="!registerForm.valid"
+        class="register-button"
+      >
+        <ion-icon name="paw-outline" slot="start"></ion-icon>
+        Unirme a PawFinder
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

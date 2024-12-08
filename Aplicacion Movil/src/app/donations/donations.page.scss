@@ -1,0 +1,150 @@
+// Estilos generales de la página
+:host {
+  --ion-background-color: #ffffff;
+}
+
+// Estilos del encabezado
+ion-header {
+  ion-toolbar {
+    --background: #ffffff;
+    --color: #ff6b00;
+
+    ion-back-button {
+      --color: #ff6b00;
+    }
+
+    ion-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+
+      ion-icon {
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// Estilos del banner naranja
+.orange-banner {
+  background-color: #ff6b00;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// Estilos de la sección de propósitos
+.purposes-section {
+  padding: 20px;
+  background-color: #f4f5f8;
+  margin: 20px 0;
+  border-radius: 20px;
+
+  h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  ion-list {
+    background-color: transparent;
+
+    ion-item {
+      --background: transparent;
+      --padding-start: 0;
+      --inner-padding-end: 0;
+      margin-bottom: 10px;
+
+      ion-icon {
+        color: #ff6b00;
+        margin-right: 10px;
+        font-size: 20px;
+      }
+
+      ion-label {
+        color: #333;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Estilos del contenedor principal
+.donation-container {
+  padding: 20px;
+
+  .donate-button {
+    --background: #009cde;
+    --background-hover: #008ac8;
+    --background-activated: #007ab3;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 1rem 0;
+    --border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    ion-icon {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      transition: transform 0.3s ease;
+    }
+  }
+}
+
+// Estilos responsivos
+@media (max-width: 576px) {
+  .orange-banner {
+    h1 {
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .purposes-section {
+    h2 {
+      font-size: 18px;
+    }
+
+    ion-list ion-item {
+      ion-icon {
+        font-size: 18px;
+      }
+
+      ion-label {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .donation-container {
+    .donate-button {
+      font-size: 16px;
+      height: 44px;
+
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <div class="title-container">
+        <ion-icon name="paw"></ion-icon>
+        <span>PawFinder</span>
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToProfile()">
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goToNotifications()">
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        <ion-badge *ngIf="unreadNotificationsCount > 0" color="danger">{{ unreadNotificationsCount }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Historias Destacadas -->
+  <div class="stories-section">
+    <h2>Historias Destacadas</h2>
+    <div class="stories-container">
+      <div class="story-card" *ngFor="let story of highlights">
+        <div class="story-image" [style.backgroundImage]="'url(' + story.image + ')'">
+          <div class="story-badge" [ngClass]="story.type">
+            {{ story.type === 'found' ? '¡Encontrado!' : story.type === 'adopted' ? 'Adoptado' : 'Perdido' }}
+          </div>
+        </div>
+        <div class="story-content">
+          <h3>{{ story.title }}</h3>
+          <p>
+            <ion-icon name="time-outline"></ion-icon>
+            {{ story.date }}
+          </p>
+          <p>
+            <ion-icon name="location-outline"></ion-icon>
+            {{ story.location }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones Rápidas -->
+  <div class="quick-actions">
+    <h2>Acciones Rápidas</h2>
+    <div class="actions-grid">
+      <ion-card *ngFor="let action of quickActions" (click)="navigateTo(action.route)" class="action-card">
+        <ion-icon [name]="action.icon" [style.color]="action.color"></ion-icon>
+        <h3>{{ action.title }}</h3>
+        <p>{{ action.description }}</p>
+        <ion-badge *ngIf="action.badge" color="primary">{{ action.badge }}</ion-badge>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="stats-section">
+    <ion-card>
+      <ion-card-content>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h2>150+</h2>
+            <p>Mascotas Encontradas</p>
+          </div>
+          <div class="stat-item">
+            <h2>200+</h2>
+            <p>Adopciones Exitosas</p>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

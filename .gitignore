@@ -1,0 +1,77 @@
+# Archivos temporales generales
+*~
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+*.log
+log.txt
+
+# Ignorar carpetas específicas de los subproyectos
+Aplicacion Movil/node_modules/
+Aplicacion Movil/platforms/
+Aplicacion Movil/plugins/
+Aplicacion Movil/www/
+Aplicacion Movil/coverage/
+Aplicacion Movil/.angular/
+Aplicacion Movil/.angular/cache/
+Aplicacion Movil/.sass-cache/
+Aplicacion Movil/.nx/
+Aplicacion Movil/.nx/cache/
+Aplicacion Movil/.sourcemaps
+Aplicacion Movil/.versions
+
+apiv2/__pycache__/
+apiv2/env/
+apiv2/venv/
+apiv2/.sourcemaps
+apiv2/.versions
+apiv2/coverage/
+apiv2/.sass-cache/
+apiv2/.angular/
+apiv2/.angular/cache/
+apiv2/.nx/
+apiv2/.nx/cache/
+
+# Archivos de configuración sensibles
+.env
+pawfinder-aa1a9-firebase-adminsdk-t1bwy-562848a9e0.json
+
+# Salidas compiladas
+Aplicacion Movil/dist/
+Aplicacion Movil/tmp/
+Aplicacion Movil/out-tsc/
+Aplicacion Movil/bazel-out/
+
+apiv2/dist/
+apiv2/tmp/
+apiv2/out-tsc/
+apiv2/bazel-out/
+
+# IDEs y editores
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Configuración específica de VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de Node.js
+npm-debug.log
+yarn-error.log

@@ -1,0 +1,117 @@
+// Estilos generales para el componente
+:host {
+  --ion-background-color: #ffffff;
+}
+
+// Estilos para el encabezado
+ion-header {
+  ion-toolbar {
+    --background: #ffffff;
+    --color: #ff6b00;
+
+    // Estilos para el botón de retroceso
+    ion-back-button {
+      --color: #ff6b00;
+    }
+
+    // Estilos para el título
+    ion-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+
+      // Estilos para el icono en el título
+      ion-icon {
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// Estilos comunes para todas las secciones
+.about-section,
+.impact-section,
+.help-section,
+.faq-section,
+.contact-section {
+  margin-bottom: 30px;
+
+  // Estilos para los títulos de sección
+  h2 {
+    color: #ff6b00;
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  // Estilos para los párrafos
+  p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+// Estilos específicos para la sección de impacto
+.impact-section {
+  .impact-item {
+    text-align: center;
+    background-color: #f4f5f8;
+    padding: 15px;
+    border-radius: 8px;
+
+    // Estilos para los números de impacto
+    h3 {
+      color: #ff6b00;
+      font-size: 28px;
+      margin: 0;
+    }
+
+    // Estilos para las etiquetas de impacto
+    p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+  }
+}
+
+// Estilos específicos para la sección de ayuda
+.help-section {
+  ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+
+    // Estilos para los elementos de la lista
+    li {
+      margin-bottom: 10px;
+      color: #333;
+    }
+  }
+}
+
+// Estilos específicos para la sección de preguntas frecuentes
+.faq-section {
+  ion-accordion {
+    margin-bottom: 10px;
+  }
+
+  // Estilos para los elementos del acordeón
+  ion-item {
+    --background: #f4f5f8;
+    --color: #333;
+    --border-radius: 8px;
+  }
+}
+
+// Estilos generales para los botones
+ion-button {
+  --background: #ff6b00;
+  --background-activated: #e65c00;
+  --color: #ffffff;
+  margin-top: 15px;
+}
+
+// Estilos específicos para el botón secundario
+ion-button[color="secondary"] {
+  --background: #4caf50;
+  --background-activated: #45a049;
+}

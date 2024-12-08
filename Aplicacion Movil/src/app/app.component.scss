@@ -1,0 +1,88 @@
+// Estilos para el menú
+ion-menu {
+  --width: 280px;
+  --max-width: 280px;
+
+  ion-content {
+    --background: var(--ion-color-light);
+  }
+
+  ion-list {
+    padding: 20px 0;
+
+    ion-list-header {
+      padding-left: 20px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ion-color-primary);
+    }
+
+    ion-note {
+      padding-left: 20px;
+      font-size: 14px;
+    }
+  }
+
+  ion-item {
+    --padding-start: 20px;
+    --background: transparent;
+    --min-height: 50px;
+
+    &.selected {
+      --background: rgba(var(--ion-color-primary-rgb), 0.1);
+      --color: var(--ion-color-primary);
+
+      ion-icon {
+        color: var(--ion-color-primary);
+      }
+    }
+
+    ion-icon {
+      color: var(--ion-color-medium);
+    }
+  }
+}
+
+// Estilos para el encabezado móvil
+ion-header {
+  ion-toolbar {
+    --background: var(--ion-color-light);
+
+    ion-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+
+      ion-icon {
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// Estilos para el botón de menú en móvil
+ion-menu-button {
+  --color: var(--ion-color-primary);
+}
+
+// Ajustes para el modo oscuro
+:host(.dark) {
+  ion-menu {
+    ion-content {
+      --background: var(--ion-color-dark);
+    }
+
+    ion-item {
+      --background: transparent;
+      --color: var(--ion-color-light);
+
+      &.selected {
+        --background: rgba(var(--ion-color-primary-rgb), 0.2);
+      }
+    }
+  }
+
+  ion-header ion-toolbar {
+    --background: var(--ion-color-dark);
+  }
+}

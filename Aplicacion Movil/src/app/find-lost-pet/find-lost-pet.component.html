@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Encontrar Mascota Perdida</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    (ionChange)="onBusquedaCambio($event)"
+    [value]="terminoBusqueda"
+    placeholder="Buscar por nombre, raza o descripción">
+  </ion-searchbar>
+
+  <ion-segment (ionChange)="onTipoCambio($event)" [value]="tipoSeleccionado">
+    <ion-segment-button value="todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="perro">
+      <ion-label>Perros</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="gato">
+      <ion-label>Gatos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="otro">
+      <ion-label>Otros</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-list>
+    <ion-item *ngFor="let mascota of mascotasFiltradas">
+      <ion-card class="mascota-card">
+        <img [src]="mascota.urlImagenMascota || '/assets/default-pet.jpg'" [alt]="mascota.nombre_mascota">
+        <ion-card-header>
+          <ion-card-subtitle>{{ mascota.tipo_mascota | titlecase }} - {{ mascota.raza || 'Raza no especificada' }}</ion-card-subtitle>
+          <ion-card-title>{{ mascota.nombre_mascota }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Descripción:</strong> {{ mascota.descripcion }}</p>
+          <p><strong>Edad:</strong> {{ mascota.edad || 'No especificada' }}</p>
+          <p><strong>Color:</strong> {{ mascota.color || 'No especificado' }}</p>
+          <p><strong>Dirección:</strong> {{ mascota.direccion || 'No especificada' }}</p>
+          <p><strong>Última vez visto:</strong> {{ formatearFecha(mascota.fechaUltimaVista) }}</p>
+          <p *ngIf="mascota.recompensa"><strong>Recompensa:</strong> {{ mascota.montoRecompensa | currency:'USD':'symbol':'1.2-2' }}</p>
+          <p><strong>Teléfono de contacto:</strong> {{ mascota.telefonoContacto || 'No especificado' }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "pawfinder-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

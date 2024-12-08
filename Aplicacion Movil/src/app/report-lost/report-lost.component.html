@@ -1,0 +1,326 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="title-container">
+        <ion-icon name="paw"></ion-icon>
+        <span>Reportar Mascota Perdida</span>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="header-banner">
+    <h1>¿Perdiste tu mascota?</h1>
+    <p>Te ayudaremos a encontrarla. Completa la información a continuación.</p>
+  </div>
+
+  <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" class="report-form">
+    <div class="form-section">
+      <div class="section-header">
+        <ion-icon name="paw-outline"></ion-icon>
+        <h2>Información de la Mascota</h2>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-icon name="fish-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Tipo de mascota</ion-label>
+        <ion-select formControlName="tipo_mascota" interface="action-sheet">
+          <ion-select-option *ngFor="let type of petTypes" [value]="type.value">
+            {{ type.label }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('tipo_mascota')?.invalid &&
+          reportForm.get('tipo_mascota')?.touched
+        "
+      >
+        <p>El tipo de mascota es requerido</p>
+      </ion-text>
+
+      <ion-item class="custom-item">
+        <ion-icon name="heart-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Nombre de la mascota</ion-label>
+        <ion-input formControlName="nombre_mascota" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('nombre_mascota')?.invalid &&
+          reportForm.get('nombre_mascota')?.touched
+        "
+      >
+        <p>El nombre de la mascota es requerido</p>
+      </ion-text>
+
+      <ion-item class="custom-item">
+        <ion-icon name="paw-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Raza</ion-label>
+        <ion-input formControlName="raza" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('raza')?.invalid && reportForm.get('raza')?.touched
+        "
+      >
+        <p>La raza es requerida</p>
+      </ion-text>
+
+      <ion-item class="custom-item">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Edad aproximada</ion-label>
+        <ion-input formControlName="edad" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('edad')?.invalid && reportForm.get('edad')?.touched
+        "
+      >
+        <p>La edad es requerida</p>
+      </ion-text>
+
+      <ion-item class="custom-item">
+        <ion-icon name="color-palette-outline" slot="start"></ion-icon>
+        <ion-label position="floating"
+          >Color/Características distintivas</ion-label
+        >
+        <ion-input formControlName="color" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('color')?.invalid && reportForm.get('color')?.touched
+        "
+      >
+        <p>El color es requerido</p>
+      </ion-text>
+    </div>
+
+    <div class="form-section">
+      <div class="section-header">
+        <ion-icon name="location-outline"></ion-icon>
+        <h2>Última Vez Visto</h2>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Fecha</ion-label>
+        <ion-datetime
+          formControlName="fechaUltimaVista"
+          display-format="DD/MM/YYYY"
+          [max]="maxDate"
+          cancelText="Cancelar"
+          doneText="Aceptar"
+        ></ion-datetime>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('fechaUltimaVista')?.invalid &&
+          reportForm.get('fechaUltimaVista')?.touched
+        "
+      >
+        <p>La fecha es requerida</p>
+      </ion-text>
+
+      <ion-item class="custom-item">
+        <ion-icon name="navigate-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Dirección</ion-label>
+        <ion-input formControlName="direccion" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('direccion')?.invalid &&
+          reportForm.get('direccion')?.touched
+        "
+      >
+        <p>La dirección es requerida</p>
+      </ion-text>
+
+      <ion-button
+        expand="block"
+        (click)="searchAddress()"
+        class="search-button"
+        [disabled]="!reportForm.get('direccion')?.valid"
+      >
+        <ion-icon name="search-outline" slot="start"></ion-icon>
+        Buscar Dirección
+      </ion-button>
+
+      <div class="map-container">
+        <div #map id="report-map"></div>
+        <p class="map-instruction">
+          Confirma la ubicación en el mapa o toca para seleccionar un punto
+          diferente
+        </p>
+      </div>
+
+      <div *ngIf="isAddressConfirmed" class="address-confirmed">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <span>Dirección confirmada</span>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="section-header">
+        <ion-icon name="camera-outline"></ion-icon>
+        <h2>Fotos de tu Mascota</h2>
+      </div>
+
+      <div class="photo-upload">
+        <div class="upload-zone" (click)="fileInput.click()">
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+          <h3>Sube una foto de tu mascota</h3>
+          <p>Toca aquí para seleccionar una imagen</p>
+          <ion-button fill="outline">
+            <ion-icon name="image-outline" slot="start"></ion-icon>
+            Seleccionar Foto
+          </ion-button>
+        </div>
+        <input
+          #fileInput
+          type="file"
+          accept="image/*"
+          (change)="onImageSelected($event)"
+          style="display: none"
+        />
+
+        <div class="preview-container" *ngIf="imagePreview">
+          <div class="preview-image">
+            <img [src]="imagePreview" alt="Vista previa" />
+            <div class="preview-overlay">
+              <ion-button
+                fill="clear"
+                color="light"
+                (click)="fileInput.click()"
+              >
+                <ion-icon name="create-outline"></ion-icon>
+                Cambiar
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ion-text color="danger" *ngIf="!selectedImage && reportForm.touched">
+        <p>Debes seleccionar una imagen</p>
+      </ion-text>
+    </div>
+
+    <div class="form-section">
+      <div class="section-header">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <h2>Descripción Adicional</h2>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-label position="floating"
+          >Describe cualquier detalle adicional que pueda ayudar</ion-label
+        >
+        <ion-textarea formControlName="descripcion" rows="4"></ion-textarea>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('descripcion')?.invalid &&
+          reportForm.get('descripcion')?.touched
+        "
+      >
+        <p>La descripción debe tener al menos 20 caracteres</p>
+      </ion-text>
+    </div>
+
+    <div class="form-section">
+      <div class="section-header">
+        <ion-icon name="call-outline"></ion-icon>
+        <h2>Información de Contacto</h2>
+      </div>
+
+      <ion-item class="custom-item">
+        <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Teléfono de contacto</ion-label>
+        <ion-input formControlName="telefonoContacto" type="tel"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('telefonoContacto')?.invalid &&
+          reportForm.get('telefonoContacto')?.touched
+        "
+      >
+        <p>Ingresa un número de teléfono válido</p>
+      </ion-text>
+
+      <ion-item class="custom-item">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-label position="floating">Email de contacto</ion-label>
+        <ion-input formControlName="emailContacto" type="email"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="
+          reportForm.get('emailContacto')?.invalid &&
+          reportForm.get('emailContacto')?.touched
+        "
+      >
+        <p>Ingresa un email válido</p>
+      </ion-text>
+
+      <div class="reward-section">
+        <ion-item class="custom-item toggle-item">
+          <ion-icon name="gift-outline" slot="start"></ion-icon>
+          <ion-label>Ofrecer recompensa</ion-label>
+          <ion-toggle formControlName="recompensa" mode="ios"></ion-toggle>
+        </ion-item>
+
+        <ion-item
+          class="custom-item"
+          *ngIf="reportForm.get('recompensa')?.value"
+        >
+          <ion-icon name="cash-outline" slot="start"></ion-icon>
+          <ion-label position="floating">Monto de la recompensa</ion-label>
+          <ion-input
+            formControlName="montoRecompensa"
+            type="number"
+          ></ion-input>
+        </ion-item>
+        <ion-text
+          color="danger"
+          *ngIf="
+            reportForm.get('recompensa')?.value &&
+            reportForm.get('montoRecompensa')?.invalid &&
+            reportForm.get('montoRecompensa')?.touched
+          "
+        >
+          <p>Ingresa un monto válido para la recompensa</p>
+        </ion-text>
+      </div>
+    </div>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      class="submit-button"
+      [disabled]="!isFormValid()"
+    >
+      <ion-icon name="paper-plane-outline" slot="start"></ion-icon>
+      {{ isSubmitting ? "Enviando..." : "Enviar Reporte" }}
+    </ion-button>
+
+    <ion-text color="danger" *ngIf="!isFormValid() && reportForm.touched">
+      <p *ngIf="!selectedImage">Debes seleccionar una imagen de tu mascota</p>
+      <p *ngIf="!isAddressConfirmed">Debes confirmar la dirección en el mapa</p>
+      <p *ngIf="reportForm.get('fechaUltimaVista')?.invalid">
+        Debes seleccionar una fecha válida
+      </p>
+    </ion-text>
+  </form>
+</ion-content>

@@ -1,0 +1,190 @@
+// Variables de color
+$primary-color: #f5a623; // Naranja principal
+$secondary-color: #ffd180; // Naranja claro
+$background-color: #fff9e6; // Beige muy claro para el fondo
+$text-color: #333333; // Gris oscuro para el texto
+$card-background: #ffffff; // Blanco para las tarjetas
+$danger-color: #e74c3c; // Rojo para acciones peligrosas
+$accent-color: #ff7043; // Naranja más intenso para acentos
+
+:host {
+  display: block;
+  background-color: $background-color;
+  min-height: 100vh;
+}
+
+ion-header {
+  ion-toolbar {
+    --background: $primary-color;
+    --color: #ffffff;
+
+    ion-title {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+
+      ion-icon {
+        margin-right: 8px;
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+ion-content {
+  --background: $background-color;
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: $accent-color;
+    margin-bottom: 20px;
+  }
+
+  ion-segment {
+    --background: $card-background;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    ion-segment-button {
+      --color: $text-color;
+      --color-checked: $primary-color;
+      --indicator-color: $primary-color;
+    }
+  }
+
+  ion-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    ion-card-header {
+      background-color: $primary-color;
+      color: #ffffff;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      padding: 16px;
+
+      ion-card-title {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      ion-card-subtitle {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 8px;
+      }
+    }
+
+    ion-card-content {
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      ion-icon {
+        font-size: 48px;
+        color: $accent-color;
+      }
+    }
+  }
+
+  ion-list {
+    background: transparent;
+
+    ion-item {
+      --background: $card-background;
+      --border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      ion-avatar, ion-thumbnail {
+        width: 60px;
+        height: 60px;
+        margin-right: 16px;
+      }
+
+      ion-label {
+        h3 {
+          font-weight: bold;
+          color: $accent-color;
+          font-size: 18px;
+          margin-bottom: 4px;
+        }
+
+        p {
+          color: $text-color;
+          margin-bottom: 2px;
+          font-size: 14px;
+        }
+      }
+
+      ion-button {
+        --background: $danger-color;
+        --border-radius: 20px;
+      }
+    }
+  }
+}
+
+// Estilos específicos para cada sección
+.users-section,
+.lost-pets-section,
+.adoptions-section {
+  h2 {
+    font-size: 22px;
+    color: $accent-color;
+    margin-bottom: 16px;
+    border-bottom: 2px solid $primary-color;
+    padding-bottom: 8px;
+  }
+}
+
+// Animación para los iconos
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+ion-card-content ion-icon {
+  animation: pulse 2s infinite;
+}
+
+// Media queries para responsividad
+@media (max-width: 576px) {
+  ion-card {
+    margin: 10px 0;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  ion-segment {
+    --background: transparent;
+    box-shadow: none;
+  }
+
+  ion-list ion-item {
+    ion-avatar, ion-thumbnail {
+      width: 50px;
+      height: 50px;
+    }
+
+    ion-label h3 {
+      font-size: 16px;
+    }
+
+    ion-label p {
+      font-size: 12px;
+    }
+  }
+}

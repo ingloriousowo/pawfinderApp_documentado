@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="heart"></ion-icon>
+      Donaciones
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Banner naranja con título y descripción -->
+  <div class="orange-banner">
+    <h1>Ayuda a nuestros amigos peludos</h1>
+    <p>Tu ayuda transforma vidas. Dona hoy y da esperanza a mascotas sin hogar. Unidos podemos darles el amor que merecen. Cada aporte suma.</p>
+  </div>
+
+  <!-- Sección de propósitos -->
+  <div class="purposes-section">
+    <h2>Tu donación nos ayuda a:</h2>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="paw" slot="start"></ion-icon>
+        <ion-label>Rescatar animales en situación de calle</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="medical" slot="start"></ion-icon>
+        <ion-label>Proporcionar atención veterinaria</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="home" slot="start"></ion-icon>
+        <ion-label>Mantener refugios temporales</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="heart" slot="start"></ion-icon>
+        <ion-label>Facilitar adopciones responsables</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="donation-container">
+    <ion-button
+      expand="block"
+      class="donate-button"
+      href="https://www.paypal.com/donate/?hosted_button_id=8L2D492HG4HBA"
+      target="_blank"
+      rel="noopener noreferrer">
+      <ion-icon name="logo-paypal" slot="start"></ion-icon>
+      Donar ahora con PayPal
+    </ion-button>
+  </div>
+</ion-content>

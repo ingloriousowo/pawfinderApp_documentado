@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="paw-outline"></ion-icon>
+      Adoptar Mascota
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="orange-banner">
+    <h1>Encuentra tu compañero perfecto</h1>
+    <p>Explora nuestra lista de mascotas en busca de un hogar y cambia una vida para siempre.</p>
+  </div>
+
+  <div class="search-filter-container">
+    <ion-searchbar
+      (ionChange)="onSearchChange($event)"
+      placeholder="Buscar por nombre, raza o contacto"
+      mode="ios">
+    </ion-searchbar>
+
+    <ion-segment (ionChange)="onTypeChange($event)" value="all" mode="ios">
+      <ion-segment-button value="all">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="perro">
+        <ion-label>Perros</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="gato">
+        <ion-label>Gatos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="pets-container">
+    <ion-card *ngFor="let pet of filteredPets" class="pet-card">
+      <img [src]="pet.imageUrl" [alt]="pet.petName">
+      <ion-card-header>
+        <ion-card-subtitle>{{ pet.petType }} - {{ pet.breed }}</ion-card-subtitle>
+        <ion-card-title>{{ pet.petName }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><ion-icon name="calendar-outline"></ion-icon> {{ pet.age }} años</p>
+        <p><ion-icon name="male-female-outline"></ion-icon> {{ pet.gender }}</p>
+        <p><ion-icon name="medkit-outline"></ion-icon> {{ pet.healthStatus }}</p>
+        <p class="description"><ion-icon name="information-circle-outline"></ion-icon> {{ pet.description }}</p>
+        <div class="contact-info">
+          <h3>Información de contacto</h3>
+          <p><ion-icon name="person-outline"></ion-icon> {{ pet.contactName }}</p>
+          <p><ion-icon name="call-outline"></ion-icon> {{ pet.contactPhone }}</p>
+          <p><ion-icon name="mail-outline"></ion-icon> {{ pet.contactEmail }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

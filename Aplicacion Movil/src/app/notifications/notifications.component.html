@@ -1,0 +1,33 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notificaciones</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearAllNotifications()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let notification of notifications" (click)="markAsRead(notification.id)">
+      <ion-icon name="notifications-outline" slot="start" [color]="notification.read ? 'medium' : 'primary'"></ion-icon>
+      <ion-label>
+        <h2 [class.unread]="!notification.read">{{ notification.message }}</h2>
+        <p>
+          <ion-icon name="time-outline"></ion-icon>
+          {{ notification.timestamp | date:'medium' }}
+        </p>
+      </ion-label>
+      <ion-badge *ngIf="!notification.read" color="warning" slot="end">Nueva</ion-badge>
+    </ion-item>
+    <ion-item *ngIf="notifications.length === 0">
+      <ion-icon name="notifications-off-outline" slot="start" color="medium"></ion-icon>
+      <ion-label>No tienes notificaciones</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

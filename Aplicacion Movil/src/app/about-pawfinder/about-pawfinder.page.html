@@ -1,0 +1,90 @@
+<!-- Encabezado de la página -->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Botón de retroceso -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <!-- Título de la página con icono -->
+    <ion-title>
+      <ion-icon name="paw"></ion-icon>
+      Más sobre PawFinder
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenido principal de la página -->
+<ion-content class="ion-padding">
+  <!-- Sección "Acerca de PawFinder" -->
+  <div class="about-section">
+    <h2>Acerca de PawFinder</h2>
+    <p>PawFinder nació con la misión de conectar a mascotas necesitadas con hogares amorosos. Desde 2020, hemos estado trabajando incansablemente para hacer del mundo un lugar mejor para nuestros amigos peludos.</p>
+  </div>
+
+  <!-- Sección de impacto con estadísticas -->
+  <div class="impact-section">
+    <h2>Nuestro Impacto</h2>
+    <ion-grid>
+      <ion-row>
+        <!-- Estadística de adopciones -->
+        <ion-col>
+          <div class="impact-item">
+            <h3>{{ impact.adoptions }}</h3>
+            <p>Adopciones</p>
+          </div>
+        </ion-col>
+        <!-- Estadística de rescates -->
+        <ion-col>
+          <div class="impact-item">
+            <h3>{{ impact.rescues }}</h3>
+            <p>Rescates</p>
+          </div>
+        </ion-col>
+        <!-- Estadística de voluntarios -->
+        <ion-col>
+          <div class="impact-item">
+            <h3>{{ impact.volunteers }}</h3>
+            <p>Voluntarios</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Sección "Cómo Ayudar" -->
+  <div class="help-section">
+    <h2>Cómo Ayudar</h2>
+    <p>Además de adoptar o donar, puedes ayudar de muchas maneras:</p>
+    <ul>
+      <li>Conviértete en voluntario en un refugio local</li>
+      <li>Comparte publicaciones de mascotas en redes sociales</li>
+      <li>Ofrece tu hogar como hogar temporal para mascotas</li>
+      <li>Participa en eventos de recaudación de fondos</li>
+    </ul>
+    <!-- Botón para registrarse como voluntario -->
+    <ion-button expand="block" color="primary">Regístrate como Voluntario</ion-button>
+  </div>
+
+  <!-- Sección de Preguntas Frecuentes -->
+  <div class="faq-section">
+    <h2>Preguntas Frecuentes</h2>
+    <!-- Grupo de acordeones para las preguntas frecuentes -->
+    <ion-accordion-group>
+      <!-- Iteración sobre cada pregunta frecuente -->
+      <ion-accordion *ngFor="let faq of faqs">
+        <ion-item slot="header">
+          <ion-label>{{ faq.question }}</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">{{ faq.answer }}</div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+
+  <!-- Sección de Contacto -->
+  <div class="contact-section">
+    <h2>Contacto</h2>
+    <p>¿Tienes alguna pregunta o sugerencia? Nos encantaría escucharte.</p>
+    <!-- Botón para contactar -->
+    <ion-button expand="block" color="secondary">Contáctanos</ion-button>
+  </div>
+</ion-content>

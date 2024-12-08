@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <ion-icon name="paw-outline" aria-hidden="true"></ion-icon>
+      Panel de Administración PawFinder
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" aria-label="Cerrar sesión">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h1>Bienvenido, {{ adminName }}</h1>
+
+  <ion-segment (ionChange)="setActiveSection($event)" value="overview" aria-label="Secciones del panel">
+    <ion-segment-button value="overview">
+      <ion-label>Resumen</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="users">
+      <ion-label>Usuarios</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lostPets">
+      <ion-label>Mascotas Perdidas</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="adoptions">
+      <ion-label>Adopciones</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="activeSection">
+    <div *ngSwitchCase="'overview'">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="4">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Gestión de Usuarios</ion-card-title>
+                <ion-card-subtitle>Total: {{ stats.totalUsers }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-icon name="people-outline" size="large" aria-hidden="true"></ion-icon>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Mascotas Perdidas</ion-card-title>
+                <ion-card-subtitle>Total: {{ stats.totalLostPets }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-icon name="paw-outline" size="large" aria-hidden="true"></ion-icon>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col size="12" size-md="4">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Adopciones</ion-card-title>
+                <ion-card-subtitle>Total: {{ stats.totalAdoptions }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-icon name="heart-outline" size="large" aria-hidden="true"></ion-icon>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngSwitchCase="'users'">
+      <h2>Gestión de Usuarios</h2>
+      <ion-list>
+        <ion-item *ngFor="let user of users">
+          <ion-avatar slot="start">
+            <img [src]="user.urlFotoPerfil || 'assets/default-avatar.png'" alt="Foto de perfil">
+          </ion-avatar>
+          <ion-label>
+            <h3>{{ user.nombre }} {{ user.apellido }}</h3>
+            <p>{{ user.correo }}</p>
+          </ion-label>
+          <ion-button slot="end" color="danger" (click)="deleteUser(user.id)" aria-label="Eliminar usuario">
+            <ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'lostPets'">
+      <h2>Mascotas Perdidas</h2>
+      <ion-list>
+        <ion-item *ngFor="let pet of lostPets">
+          <ion-thumbnail slot="start">
+            <img [src]="pet.urlImagenMascota || 'assets/default-pet.png'" alt="Foto de mascota perdida">
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ pet.nombre }}</h3>
+            <p>{{ pet.especie }} - {{ pet.raza }}</p>
+            <p>Última vez visto: {{ pet.fechaUltimaVista }}</p>
+            <p>Dirección: {{pet.direccion}}</p>
+            <p>Descripción: {{ pet.descripcion }}</p>
+          </ion-label>
+          <ion-button slot="end" color="danger" (click)="deleteLostPet(pet.id)" aria-label="Eliminar reporte de mascota perdida">
+            <ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'adoptions'">
+      <h2>Mascotas en Adopción</h2>
+      <ion-list>
+        <ion-item *ngFor="let pet of adoptionPets">
+          <ion-thumbnail slot="start">
+            <img [src]="pet.imageUrl || 'assets/default-pet.png'" alt="Foto de mascota en adopción">
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ pet.petName }}</h3>
+            <p>{{ pet.petType }} - {{ pet.breed }}</p>
+            <p>Edad: {{ pet.age }} años</p>
+            <p>Género: {{ pet.gender }}</p>
+            <p>Descripción: {{ pet.description }}</p>
+          </ion-label>
+          <ion-button slot="end" color="danger" (click)="deleteAdoptionPet(pet.id)" aria-label="Eliminar anuncio de adopción">
+            <ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,74 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="title-container">
+      <h1>
+        <svg
+          class="paw-icon"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256,224c-12.8-26.4-29.6-47.2-48.8-63.2c-19.2-16-40-24.8-60.8-24.8s-41.6,8.8-60.8,24.8
+            c-19.2,16-36,36.8-48.8,63.2c-12.8,26.4-20,54.4-20,84s7.2,57.6,20,84c12.8,26.4,29.6,47.2,48.8,63.2c19.2,16,40,24.8,60.8,24.8
+            s41.6-8.8,60.8-24.8c19.2-16,36-36.8,48.8-63.2c12.8-26.4,20-54.4,20-84S268.8,250.4,256,224z M146.4,408c-32,0-58.4-28-58.4-62.4
+            s26.4-62.4,58.4-62.4s58.4,28,58.4,62.4S178.4,408,146.4,408z"
+          />
+          <path
+            d="M484,224c-12.8-26.4-29.6-47.2-48.8-63.2c-19.2-16-40-24.8-60.8-24.8s-41.6,8.8-60.8,24.8
+            c-19.2,16-36,36.8-48.8,63.2c-12.8,26.4-20,54.4-20,84s7.2,57.6,20,84c12.8,26.4,29.6,47.2,48.8,63.2c19.2,16,40,24.8,60.8,24.8
+            s41.6-8.8,60.8-24.8c19.2-16,36-36.8,48.8-63.2c12.8-26.4,20-54.4,20-84S496.8,250.4,484,224z M374.4,408c-32,0-58.4-28-58.4-62.4
+            s26.4-62.4,58.4-62.4s58.4,28,58.4,62.4S406.4,408,374.4,408z"
+          />
+        </svg>
+        PawFinder
+      </h1>
+      <p class="subtitle">Encuentra a tu compañero perfecto</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <div class="input-wrapper">
+          <i class="icon-email">📧</i>
+          <input
+            type="email"
+            formControlName="correo"
+            placeholder="Correo electrónico"
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-wrapper">
+          <i class="icon-lock">🔒</i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Contraseña"
+            class="form-input"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+          >
+            <i [class]="showPassword ? 'icon-eye-off' : 'icon-eye'">{{
+              showPassword ? "🙈" : "👁"
+            }}</i>
+          </button>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="!loginForm.valid" class="login-button">
+        Iniciar Sesión
+      </button>
+    </form>
+
+    <div class="register-prompt">
+      <span>¿No tienes una cuenta? </span>
+      <a data-test-id="registerButton" routerLink="/auth/register"
+        >¡Regístrate aquí!</a
+      >
+    </div>
+  </div>
+</div>

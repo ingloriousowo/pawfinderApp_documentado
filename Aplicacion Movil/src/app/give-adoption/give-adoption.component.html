@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="paw-outline"></ion-icon>
+      Dar en Adopción
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="orange-banner">
+    <h1>Dar en Adopción</h1>
+    <p>Ayuda a una mascota a encontrar un hogar amoroso</p>
+  </div>
+
+  <div class="form-container">
+    <form [formGroup]="adoptionForm" (ngSubmit)="onSubmit()">
+      <ion-item>
+        <ion-label position="floating">Nombre de la mascota</ion-label>
+        <ion-input formControlName="petName" type="text"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('petName')">
+        El nombre de la mascota es requerido y debe tener al menos 2 caracteres.
+      </ion-text>
+
+      <ion-item>
+        <ion-label>Tipo de mascota</ion-label>
+        <ion-select formControlName="petType">
+          <ion-select-option *ngFor="let type of petTypes" [value]="type">{{type}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('petType')">
+        El tipo de mascota es requerido.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Raza</ion-label>
+        <ion-input formControlName="breed" type="text"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('breed')">
+        La raza es requerida y debe tener al menos 2 caracteres.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Edad</ion-label>
+        <ion-input formControlName="age" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('age')">
+        La edad es requerida y debe estar entre 0 y 30.
+      </ion-text>
+
+      <ion-item>
+        <ion-label>Género</ion-label>
+        <ion-select formControlName="gender">
+          <ion-select-option *ngFor="let gender of genders" [value]="gender">{{gender}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('gender')">
+        El género es requerido.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea formControlName="description" rows="4"></ion-textarea>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('description')">
+        La descripción es requerida y debe tener al menos 20 caracteres.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Estado de salud</ion-label>
+        <ion-input formControlName="healthStatus" type="text"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('healthStatus')">
+        El estado de salud es requerido y debe tener al menos 2 caracteres.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Nombre de contacto</ion-label>
+        <ion-input formControlName="contactName" type="text"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('contactName')">
+        El nombre de contacto es requerido y debe tener al menos 2 caracteres.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Teléfono de contacto</ion-label>
+        <ion-input formControlName="contactPhone" type="tel"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('contactPhone')">
+        El teléfono de contacto es requerido y debe tener entre 9 y 10 dígitos.
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Correo electrónico de contacto</ion-label>
+        <ion-input formControlName="contactEmail" type="email" readonly></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="isFieldInvalid('contactEmail')">
+        El correo electrónico de contacto es requerido y debe tener un formato válido.
+      </ion-text>
+
+      <div class="file-input-container">
+        <ion-button expand="block" (click)="fileInput.click()">
+          <ion-icon name="camera-outline" slot="start"></ion-icon>
+          Subir imagen
+        </ion-button>
+        <input #fileInput type="file" (change)="onFileChange($event)" accept="image/*" style="display: none;">
+      </div>
+
+      <ion-button expand="block" type="submit" [disabled]="!adoptionForm.valid">
+        Registrar para adopción
+        <ion-icon name="paw-outline" slot="end"></ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

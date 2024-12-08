@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mis Registros de Adopción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="loading" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="!loading && adoptions.length > 0">
+    <ion-card *ngFor="let adoption of adoptions" class="adoption-card">
+      <ion-card-header>
+        <ion-card-title>{{ adoption.petName }}</ion-card-title>
+        <ion-card-subtitle>{{ adoption.petType }} - {{ adoption.breed }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <ion-thumbnail class="adoption-thumbnail">
+                <img [src]="adoption.imageUrl || 'assets/default-pet.png'" [alt]="'Foto de ' + adoption.petName">
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="8">
+              <p><ion-icon name="calendar-outline"></ion-icon> Edad: {{ adoption.age }} años</p>
+              <p><ion-icon name="time-outline"></ion-icon> Creado el: {{ adoption.createdAt | date:'dd/MM/yyyy' }}</p>
+              <p class="adoption-description"><ion-icon name="information-circle-outline"></ion-icon> {{ adoption.description }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-buttons class="ion-justify-content-end">
+          <!-- <ion-button (click)="editAdoption(adoption.id)">
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button> -->
+          <ion-button (click)="deleteAdoption(adoption.id)" color="danger">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-card *ngIf="!loading && adoptions.length === 0" class="empty-state-card">
+    <ion-card-header>
+      <ion-card-title>No hay registros</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>No tienes registros de adopción.</p>
+      <ion-button expand="block" routerLink="/give-adoption" color="primary">
+        Crear un registro de adopción
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-text color="danger" *ngIf="error">
+    <p class="error-message">{{ error }}</p>
+  </ion-text>
+</ion-content>
